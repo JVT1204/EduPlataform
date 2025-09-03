@@ -22,3 +22,5 @@ public class Certificate
     public virtual User User { get; set; } = null!;
     public virtual Course Course { get; set; } = null!;
 }
+
+

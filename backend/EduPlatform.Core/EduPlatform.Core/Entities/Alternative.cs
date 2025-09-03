@@ -25,3 +25,5 @@ public class Alternative
     public virtual Question Question { get; set; } = null!;
     public virtual ICollection<Response> Responses { get; set; } = new List<Response>();
 }
+
+

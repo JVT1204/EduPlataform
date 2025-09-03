@@ -33,3 +33,5 @@ public class ForumTopic
     public virtual User User { get; set; } = null!;
     public virtual ICollection<ForumMessage> Messages { get; set; } = new List<ForumMessage>();
 }
+
+

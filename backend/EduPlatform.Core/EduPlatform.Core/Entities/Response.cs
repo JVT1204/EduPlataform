@@ -32,3 +32,5 @@ public class Response
     public virtual Alternative? Alternative { get; set; }
     public virtual User? GradedBy { get; set; }
 }
+
+

@@ -452,3 +452,5 @@ END
 PRINT 'Banco de dados EduPlatform criado com sucesso!';
 PRINT 'Todas as tabelas, índices, views, procedures e triggers foram criados.';
 PRINT 'Dados iniciais foram inseridos.';
+
+

@@ -24,3 +24,5 @@ public class ForumMessage
     public virtual ForumTopic Topic { get; set; } = null!;
     public virtual User User { get; set; } = null!;
 }
+
+

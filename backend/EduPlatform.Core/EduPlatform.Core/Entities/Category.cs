@@ -20,3 +20,5 @@ public class Category
     // Navigation properties
     public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 }
+
+
