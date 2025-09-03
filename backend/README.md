@@ -10,7 +10,9 @@ backend/
 ├── EduPlatform.Core/          # Entidades e interfaces
 ├── EduPlatform.Infrastructure/ # Contexto do banco e repositórios
 ├── EduPlatform.Application/   # Casos de uso e DTOs
-└── EduPlatform.Tests/         # Testes unitários
+├── EduPlatform.Tests/         # Testes unitários
+├── database_schema.sql        # Script completo do banco de dados
+└── README.md                  # Documentação
 ```
 
 ## Tecnologias Utilizadas
@@ -28,32 +30,104 @@ backend/
 
 ## Configuração do Banco de Dados
 
-### SQL Server
+### Opção 1: Usando o Script SQL (Recomendado)
 
-1. Instale o SQL Server (pode ser SQL Server Express)
-2. Configure a string de conexão no `appsettings.json`:
+1. **Execute o script SQL completo:**
+   ```bash
+   # Abra o SQL Server Management Studio ou Azure Data Studio
+   # Execute o arquivo: backend/database_schema.sql
+   ```
 
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=EduPlatform;Trusted_Connection=true;TrustServerCertificate=true;"
-  }
-}
-```
+2. **Configure a string de conexão no `appsettings.json`:**
+   ```json
+   {
+     "ConnectionStrings": {
+       "DefaultConnection": "Server=localhost;Database=EduPlatform;Trusted_Connection=true;TrustServerCertificate=true;"
+     }
+   }
+   ```
+
+### Opção 2: Usando Entity Framework Migrations
+
+1. **Configure a string de conexão no `appsettings.json`**
+2. **Crie as migrações:**
+   ```bash
+   cd EduPlatform.API
+   dotnet ef migrations add InitialCreate
+   ```
+3. **Aplique as migrações:**
+   ```bash
+   dotnet ef database update
+   ```
 
 ### PostgreSQL (Alternativa)
 
 1. Instale o PostgreSQL
 2. Adicione o pacote: `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL`
 3. Configure a string de conexão:
+   ```json
+   {
+     "ConnectionStrings": {
+       "DefaultConnection": "Host=localhost;Database=EduPlatform;Username=seu_usuario;Password=sua_senha"
+     }
+   }
+   ```
 
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Database=EduPlatform;Username=seu_usuario;Password=sua_senha"
-  }
-}
-```
+## Estrutura do Banco de Dados
+
+### 📊 **Tabelas Principais**
+
+| Tabela | Descrição | Relacionamentos |
+|--------|-----------|-----------------|
+| **Users** | Usuários (alunos, professores, admins) | Matrículas, Cursos (professor), Progresso |
+| **Categories** | Categorias de cursos | Cursos |
+| **Courses** | Cursos | Categoria, Professor, Matrículas, Módulos |
+| **Enrollments** | Matrículas de alunos | Usuário, Curso |
+| **Modules** | Módulos/disciplinas | Curso, Aulas |
+| **Lessons** | Aulas/conteúdo | Módulo, Progresso |
+| **Assessments** | Avaliações/provas | Curso, Módulo, Questões |
+| **Questions** | Questões das avaliações | Avaliação, Alternativas |
+| **Alternatives** | Alternativas das questões | Questão |
+| **Responses** | Respostas dos alunos | Questão, Usuário, Avaliação |
+| **Progress** | Progresso dos alunos | Usuário, Aula |
+| **Certificates** | Certificados | Usuário, Curso |
+| **Forums** | Fóruns de discussão | Curso |
+| **ForumTopics** | Tópicos do fórum | Fórum, Usuário |
+| **ForumMessages** | Mensagens do fórum | Tópico, Usuário |
+| **Notifications** | Notificações | Usuário |
+
+### 🔗 **Principais Relacionamentos**
+
+- **Usuário ↔ Curso** → através de **Matrículas**
+- **Curso ↔ Módulo ↔ Aula** (hierarquia)
+- **Curso ↔ Avaliação ↔ Questão ↔ Alternativa**
+- **Usuário ↔ Progresso** (avalia o andamento do aluno em cada aula)
+- **Usuário ↔ Certificado** (ao concluir curso)
+- **Curso ↔ Fórum ↔ Tópicos ↔ Mensagens**
+
+### 📈 **Índices de Performance**
+
+O script inclui índices otimizados para:
+- Consultas por email de usuário
+- Filtros por status de curso
+- Busca de matrículas por usuário/curso
+- Consultas de progresso
+- Notificações não lidas
+
+### 🎯 **Views Úteis**
+
+- `vw_CoursesWithDetails` - Cursos com detalhes do professor e categoria
+- `vw_StudentProgress` - Progresso detalhado dos alunos
+
+### ⚡ **Stored Procedures**
+
+- `sp_EnrollStudent` - Matricular aluno em curso
+- `sp_CalculateStudentProgress` - Calcular progresso do aluno
+
+### 🔄 **Triggers**
+
+- Atualização automática de timestamps
+- Marcação automática de notificações como lidas
 
 ## Como Executar
 
@@ -67,23 +141,18 @@ backend/
    dotnet restore
    ```
 
-3. **Crie as migrações do banco de dados:**
+3. **Execute o script do banco de dados:**
+   ```bash
+   # Execute o arquivo database_schema.sql no SQL Server
+   ```
+
+4. **Execute a API:**
    ```bash
    cd EduPlatform.API
-   dotnet ef migrations add InitialCreate
-   ```
-
-4. **Aplique as migrações:**
-   ```bash
-   dotnet ef database update
-   ```
-
-5. **Execute a API:**
-   ```bash
    dotnet run
    ```
 
-6. **Acesse a documentação da API:**
+5. **Acesse a documentação:**
    - Swagger UI: `https://localhost:7001/swagger`
    - API: `https://localhost:7001/api`
 
@@ -104,6 +173,22 @@ backend/
 - `POST /api/courses` - Criar novo curso
 - `PUT /api/courses/{id}` - Atualizar curso
 - `DELETE /api/courses/{id}` - Deletar curso
+
+## Dados Iniciais
+
+O script SQL inclui dados iniciais:
+
+### Categorias
+- Tecnologia
+- Gestão
+- Marketing
+- Design
+- Saúde
+
+### Usuários de Exemplo
+- **Administrador**: admin@eduplatform.com
+- **Professores**: joao.silva@eduplatform.com, maria.santos@eduplatform.com
+- **Alunos**: pedro.costa@eduplatform.com, ana.oliveira@eduplatform.com
 
 ## Próximos Passos
 
@@ -133,34 +218,6 @@ backend/
    - Rate limiting
    - CORS configurado adequadamente
 
-## Estrutura de Entidades
-
-### User
-- Id, Name, Email, PasswordHash, Phone
-- Role (Student, Teacher, Admin)
-- Relacionamentos com cursos
-
-### Course
-- Id, Title, Description, ImageUrl
-- Teacher (relacionamento)
-- EnrolledStudents (relacionamento many-to-many)
-- Modules (relacionamento one-to-many)
-
-### Module
-- Id, Title, Description, Order
-- Course (relacionamento)
-- Lessons (relacionamento one-to-many)
-
-### Lesson
-- Id, Title, Description, ContentUrl, Content
-- Type (Video, Text, Quiz, Assignment)
-- Module (relacionamento)
-
-### Assignment
-- Id, Title, Description, DueDate, MaxScore
-- Course (relacionamento)
-- Submissions (relacionamento one-to-many)
-
 ## Contribuição
 
 1. Faça um fork do projeto
@@ -172,5 +229,3 @@ backend/
 ## Licença
 
 Este projeto está sob a licença MIT.
-
-

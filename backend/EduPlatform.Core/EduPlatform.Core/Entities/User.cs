@@ -26,14 +26,21 @@ public class User
     
     public DateTime? UpdatedAt { get; set; }
     
+    public DateTime? LastLogin { get; set; }
+    
     public bool IsActive { get; set; } = true;
     
     public UserRole Role { get; set; } = UserRole.Student;
     
     // Navigation properties
-    public virtual ICollection<Course> EnrolledCourses { get; set; } = new List<Course>();
+    public virtual ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
     public virtual ICollection<Course> TeachingCourses { get; set; } = new List<Course>();
-    public virtual ICollection<AssignmentSubmission> SubmittedAssignments { get; set; } = new List<AssignmentSubmission>();
+    public virtual ICollection<Progress> Progress { get; set; } = new List<Progress>();
+    public virtual ICollection<Response> Responses { get; set; } = new List<Response>();
+    public virtual ICollection<Certificate> Certificates { get; set; } = new List<Certificate>();
+    public virtual ICollection<ForumTopic> ForumTopics { get; set; } = new List<ForumTopic>();
+    public virtual ICollection<ForumMessage> ForumMessages { get; set; } = new List<ForumMessage>();
+    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 }
 
 public enum UserRole

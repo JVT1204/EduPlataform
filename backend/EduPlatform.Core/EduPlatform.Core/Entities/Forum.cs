@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EduPlatform.Core.Entities;
 
-public class Module
+public class Forum
 {
     public int Id { get; set; }
     
@@ -13,11 +13,7 @@ public class Module
     [StringLength(1000)]
     public string? Description { get; set; }
     
-    public int Order { get; set; }
-    
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    
-    public DateTime? UpdatedAt { get; set; }
     
     public bool IsActive { get; set; } = true;
     
@@ -26,8 +22,5 @@ public class Module
     
     // Navigation properties
     public virtual Course Course { get; set; } = null!;
-    public virtual ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
-    public virtual ICollection<Assessment> Assessments { get; set; } = new List<Assessment>();
+    public virtual ICollection<ForumTopic> Topics { get; set; } = new List<ForumTopic>();
 }
-
-

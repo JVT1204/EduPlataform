@@ -15,16 +15,18 @@ public class CourseRepository : Repository<Course>, ICourseRepository
     {
         return await _dbSet
             .Include(c => c.Teacher)
+            .Include(c => c.Category)
             .Include(c => c.Modules)
-            .Where(c => c.IsPublished && c.IsActive)
-            .OrderByDescending(c => c.PublishedAt)
+            .Where(c => c.Status == CourseStatus.Active && c.IsActive)
+            .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
     }
 
     public async Task<IEnumerable<Course>> GetCoursesByTeacherAsync(int teacherId)
     {
         return await _dbSet
-            .Include(c => c.EnrolledStudents)
+            .Include(c => c.Enrollments)
+                .ThenInclude(e => e.User)
             .Include(c => c.Modules)
             .Where(c => c.TeacherId == teacherId && c.IsActive)
             .OrderByDescending(c => c.CreatedAt)
@@ -33,20 +35,18 @@ public class CourseRepository : Repository<Course>, ICourseRepository
 
     public async Task<IEnumerable<User>> GetEnrolledStudentsAsync(int courseId)
     {
-        var course = await _dbSet
-            .Include(c => c.EnrolledStudents)
-            .FirstOrDefaultAsync(c => c.Id == courseId);
+        var enrollments = await _context.Enrollments
+            .Include(e => e.User)
+            .Where(e => e.CourseId == courseId && e.Status == EnrollmentStatus.Active)
+            .ToListAsync();
         
-        return course?.EnrolledStudents ?? new List<User>();
+        return enrollments.Select(e => e.User);
     }
 
     public async Task<bool> IsStudentEnrolledAsync(int courseId, int studentId)
     {
-        var course = await _dbSet
-            .Include(c => c.EnrolledStudents)
-            .FirstOrDefaultAsync(c => c.Id == courseId);
-        
-        return course?.EnrolledStudents.Any(s => s.Id == studentId) ?? false;
+        return await _context.Enrollments
+            .AnyAsync(e => e.CourseId == courseId && e.UserId == studentId && e.Status == EnrollmentStatus.Active);
     }
 }
 

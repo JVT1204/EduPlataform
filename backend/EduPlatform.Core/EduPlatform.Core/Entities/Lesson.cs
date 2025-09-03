@@ -18,7 +18,7 @@ public class Lesson
     public LessonType Type { get; set; } = LessonType.Video;
     
     [StringLength(500)]
-    public string? ContentUrl { get; set; }
+    public string? FileUrl { get; set; }
     
     public string? Content { get; set; }
     
@@ -35,15 +35,17 @@ public class Lesson
     
     // Navigation properties
     public virtual Module Module { get; set; } = null!;
-    public virtual ICollection<UserLessonProgress> UserProgress { get; set; } = new List<UserLessonProgress>();
+    public virtual ICollection<Progress> Progress { get; set; } = new List<Progress>();
 }
 
 public enum LessonType
 {
     Video,
-    Text,
+    PDF,
     Quiz,
-    Assignment
+    Link,
+    PracticalActivity,
+    Text
 }
 
 

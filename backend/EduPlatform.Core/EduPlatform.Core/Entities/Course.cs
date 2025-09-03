@@ -8,7 +8,7 @@ public class Course
     
     [Required]
     [StringLength(200)]
-    public string Title { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
     
     [StringLength(1000)]
     public string? Description { get; set; }
@@ -16,24 +16,36 @@ public class Course
     [StringLength(500)]
     public string? ImageUrl { get; set; }
     
+    public DateTime StartDate { get; set; }
+    
+    public DateTime? EndDate { get; set; }
+    
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     
     public DateTime? UpdatedAt { get; set; }
     
     public bool IsActive { get; set; } = true;
     
-    public bool IsPublished { get; set; } = false;
-    
-    public DateTime? PublishedAt { get; set; }
+    public CourseStatus Status { get; set; } = CourseStatus.Draft;
     
     // Foreign Keys
+    public int CategoryId { get; set; }
     public int TeacherId { get; set; }
     
     // Navigation properties
+    public virtual Category Category { get; set; } = null!;
     public virtual User Teacher { get; set; } = null!;
-    public virtual ICollection<User> EnrolledStudents { get; set; } = new List<User>();
+    public virtual ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
     public virtual ICollection<Module> Modules { get; set; } = new List<Module>();
-    public virtual ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
+    public virtual ICollection<Assessment> Assessments { get; set; } = new List<Assessment>();
+    public virtual ICollection<Forum> Forums { get; set; } = new List<Forum>();
+}
+
+public enum CourseStatus
+{
+    Draft,
+    Active,
+    Archived
 }
 
 

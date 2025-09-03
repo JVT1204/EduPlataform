@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EduPlatform.Core.Entities;
 
-public class Module
+public class Assessment
 {
     public int Id { get; set; }
     
@@ -13,7 +13,11 @@ public class Module
     [StringLength(1000)]
     public string? Description { get; set; }
     
-    public int Order { get; set; }
+    public AssessmentType Type { get; set; } = AssessmentType.Quiz;
+    
+    public DateTime AvailableDate { get; set; }
+    
+    public DateTime DueDate { get; set; }
     
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     
@@ -23,11 +27,19 @@ public class Module
     
     // Foreign Keys
     public int CourseId { get; set; }
+    public int? ModuleId { get; set; }
+    public int CreatedById { get; set; }
     
     // Navigation properties
     public virtual Course Course { get; set; } = null!;
-    public virtual ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
-    public virtual ICollection<Assessment> Assessments { get; set; } = new List<Assessment>();
+    public virtual Module? Module { get; set; }
+    public virtual User CreatedBy { get; set; } = null!;
+    public virtual ICollection<Question> Questions { get; set; } = new List<Question>();
 }
 
-
+public enum AssessmentType
+{
+    Quiz,
+    Exam,
+    Assignment
+}

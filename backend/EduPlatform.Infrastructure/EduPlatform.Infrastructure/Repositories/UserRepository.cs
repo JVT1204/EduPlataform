@@ -14,7 +14,8 @@ public class UserRepository : Repository<User>, IUserRepository
     public async Task<User?> GetByEmailAsync(string email)
     {
         return await _dbSet
-            .Include(u => u.EnrolledCourses)
+            .Include(u => u.Enrollments)
+                .ThenInclude(e => e.Course)
             .Include(u => u.TeachingCourses)
             .FirstOrDefaultAsync(u => u.Email == email);
     }
@@ -35,11 +36,12 @@ public class UserRepository : Repository<User>, IUserRepository
 
     public async Task<IEnumerable<Course>> GetEnrolledCoursesAsync(int userId)
     {
-        var user = await _dbSet
-            .Include(u => u.EnrolledCourses)
-            .FirstOrDefaultAsync(u => u.Id == userId);
+        var enrollments = await _context.Enrollments
+            .Include(e => e.Course)
+            .Where(e => e.UserId == userId && e.Status == EnrollmentStatus.Active)
+            .ToListAsync();
         
-        return user?.EnrolledCourses ?? new List<Course>();
+        return enrollments.Select(e => e.Course);
     }
 
     public async Task<IEnumerable<Course>> GetTeachingCoursesAsync(int userId)
