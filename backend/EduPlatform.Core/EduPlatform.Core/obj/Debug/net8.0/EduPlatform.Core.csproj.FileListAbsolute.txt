@@ -1,0 +1,12 @@
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/bin/Debug/net8.0/EduPlatform.Core.deps.json
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/bin/Debug/net8.0/EduPlatform.Core.dll
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/bin/Debug/net8.0/EduPlatform.Core.pdb
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/obj/Debug/net8.0/EduPlatform.Core.GeneratedMSBuildEditorConfig.editorconfig
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/obj/Debug/net8.0/EduPlatform.Core.AssemblyInfoInputs.cache
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/obj/Debug/net8.0/EduPlatform.Core.AssemblyInfo.cs
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/obj/Debug/net8.0/EduPlatform.Core.csproj.CoreCompileInputs.cache
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/obj/Debug/net8.0/EduPlatform.Core.sourcelink.json
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/obj/Debug/net8.0/EduPlatform.Core.dll
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/obj/Debug/net8.0/refint/EduPlatform.Core.dll
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/obj/Debug/net8.0/EduPlatform.Core.pdb
+/home/jvtortorello/Documentos/MeuOneDrive/Documentos/Mackenzie/8° semestre/TCC II/EduPlataform/backend/EduPlatform.Core/EduPlatform.Core/obj/Debug/net8.0/ref/EduPlatform.Core.dll

@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EduPlatform.API", "EduPlatform.API", "{15A758E3-E798-49AC-A938-5D8E2E9ADB43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduPlatform.API", "EduPlatform.API\EduPlatform.API\EduPlatform.API.csproj", "{D0DBDC35-8771-484F-8A8B-B218BE07989A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EduPlatform.Core", "EduPlatform.Core", "{8BDCEA46-30B1-4B69-854D-D2DE5DC1F011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduPlatform.Core", "EduPlatform.Core\EduPlatform.Core\EduPlatform.Core.csproj", "{374672C4-170B-46E2-B87F-A302B2AC869B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EduPlatform.Infrastructure", "EduPlatform.Infrastructure", "{448DB148-3761-454F-8AFE-EE299AC74AED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduPlatform.Infrastructure", "EduPlatform.Infrastructure\EduPlatform.Infrastructure\EduPlatform.Infrastructure.csproj", "{4461ED93-DD1D-40BC-936F-34051B842C8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EduPlatform.Application", "EduPlatform.Application", "{7A309BA9-3398-48F5-88DA-716359ECA8B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduPlatform.Application", "EduPlatform.Application\EduPlatform.Application\EduPlatform.Application.csproj", "{09B8FAAE-9B00-48E0-82C7-A8866A66F99D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EduPlatform.Tests", "EduPlatform.Tests", "{D7F22578-FAAD-4DB7-B75B-9F53E4D47864}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduPlatform.Tests", "EduPlatform.Tests\EduPlatform.Tests\EduPlatform.Tests.csproj", "{A96D7772-ED6A-44F4-8A0D-9AB93D745D91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0DBDC35-8771-484F-8A8B-B218BE07989A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0DBDC35-8771-484F-8A8B-B218BE07989A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0DBDC35-8771-484F-8A8B-B218BE07989A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0DBDC35-8771-484F-8A8B-B218BE07989A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{374672C4-170B-46E2-B87F-A302B2AC869B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{374672C4-170B-46E2-B87F-A302B2AC869B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{374672C4-170B-46E2-B87F-A302B2AC869B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{374672C4-170B-46E2-B87F-A302B2AC869B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4461ED93-DD1D-40BC-936F-34051B842C8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4461ED93-DD1D-40BC-936F-34051B842C8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4461ED93-DD1D-40BC-936F-34051B842C8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4461ED93-DD1D-40BC-936F-34051B842C8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09B8FAAE-9B00-48E0-82C7-A8866A66F99D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09B8FAAE-9B00-48E0-82C7-A8866A66F99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09B8FAAE-9B00-48E0-82C7-A8866A66F99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09B8FAAE-9B00-48E0-82C7-A8866A66F99D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A96D7772-ED6A-44F4-8A0D-9AB93D745D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A96D7772-ED6A-44F4-8A0D-9AB93D745D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A96D7772-ED6A-44F4-8A0D-9AB93D745D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A96D7772-ED6A-44F4-8A0D-9AB93D745D91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0DBDC35-8771-484F-8A8B-B218BE07989A} = {15A758E3-E798-49AC-A938-5D8E2E9ADB43}
+		{374672C4-170B-46E2-B87F-A302B2AC869B} = {8BDCEA46-30B1-4B69-854D-D2DE5DC1F011}
+		{4461ED93-DD1D-40BC-936F-34051B842C8A} = {448DB148-3761-454F-8AFE-EE299AC74AED}
+		{09B8FAAE-9B00-48E0-82C7-A8866A66F99D} = {7A309BA9-3398-48F5-88DA-716359ECA8B6}
+		{A96D7772-ED6A-44F4-8A0D-9AB93D745D91} = {D7F22578-FAAD-4DB7-B75B-9F53E4D47864}
+	EndGlobalSection
+EndGlobal
