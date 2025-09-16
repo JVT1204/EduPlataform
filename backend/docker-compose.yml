@@ -1,0 +1,71 @@
+version: "3.8"
+
+services:
+  # SQL Server Database
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    container_name: eduplatform-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=EduPlatform123!
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - eduplatform-network
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P EduPlatform123! -Q 'SELECT 1'",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # EduPlatform API
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: eduplatform-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=EduPlatform;User Id=sa;Password=EduPlatform123!;TrustServerCertificate=true;
+    ports:
+      - "5001:8080"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    networks:
+      - eduplatform-network
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+  # Adminer (Opcional - Interface web para gerenciar banco)
+  adminer:
+    image: adminer:latest
+    container_name: eduplatform-adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - eduplatform-network
+    environment:
+      - ADMINER_DEFAULT_SERVER=sqlserver
+    depends_on:
+      - sqlserver
+
+volumes:
+  sqlserver_data:
+    driver: local
+
+networks:
+  eduplatform-network:
+    driver: bridge

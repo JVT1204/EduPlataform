@@ -1,0 +1,21 @@
+# Override para desenvolvimento local
+version: '3.8'
+
+services:
+  api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    volumes:
+      - ./EduPlatform.API/EduPlatform.API:/app/source
+      - ./logs:/app/logs
+    ports:
+      - "5000:8080"
+    
+  sqlserver:
+    volumes:
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=EduPlatform123!
+      - MSSQL_PID=Developer
